@@ -18,7 +18,9 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup():
     sst = BackgroundApply(db.users, "selfstudy", (20, 00))
+    mt = BackgroundApply(db.users, "massage", (20, 20))
     sst.start()
+    mt.start()
 
 
 if __name__ == "__main__":
