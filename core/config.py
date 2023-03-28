@@ -11,5 +11,8 @@ class Settings(BaseSettings):
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
     }
 
+    REDIS_HOST = "redis"
+    REDIS_PORT = 6379
+
 
 settings = Settings()

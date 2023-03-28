@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from api.api import router
 from background_apply import BackgroundApply
-from core.data import db
 
 app = FastAPI(title="DOTORIMUK")
 app.include_router(router)
@@ -17,13 +16,7 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup():
-    sst = BackgroundApply(db.users, "selfstudy", (20, 00))
-    mt = BackgroundApply(db.users, "massage", (20, 20))
-    sst.start()
-    mt.start()
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=80)
+    selfstudy_thread = BackgroundApply(apply_type="selfstudy", apply_time=(20, 00))  # 8시 정각에 신청
+    massage_thread = BackgroundApply(apply_type="massage", apply_time=(20, 20))  # 8시 20분에 신청
+    selfstudy_thread.start()
+    massage_thread.start()
