@@ -16,7 +16,7 @@ class BackgroundApply(Thread):
 
     async def request_apply(self, dict):
         url = settings.APPLY_URL[self.apply_type]
-        settings.header["authorization"] = dict["access_token"]
+        settings.header["authorization"] = f"Bearer {dict['access_token']}"
 
         async with httpx.AsyncClient() as client:
             for _ in range(10):
