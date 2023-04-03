@@ -32,7 +32,7 @@ async def apply(req: ApplyRequest, db=Depends(get_redis_db)):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="아이디 또는 비밀번호가 잘못되었습니다.")
 
     db.lpush(req.apply_type, req.email)
-    db.set(req.email, res.json()["data"]["token"]["accessToken"])
+    db.set(req.email, res.json()["accessToken"])
 
     return {"message": "Success"}
 
